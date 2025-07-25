@@ -253,6 +253,13 @@ destaque em certas palavras chave*/
     /* Texto em negrito. */
 }
 
+.laranja{
+    color: rgba(255, 136, 0, 0.973);
+    /* Cor laranja para texto. */
+    font-weight: bold;
+    /* Texto em negrito. */
+}
+
 .rosa {
     font-weight: bold;
     /* Texto em negrito. */

@@ -1,7 +1,3 @@
-//Aqui temos toda a parte de funcionalidade
-//e conexão com a API do Supabase, que
-//é um banco de dados, e o nosso
-//site com a caixa de feedback
 const emojiInputs = document.querySelectorAll(".emoji-input");
 
 const nameInput = document.querySelector("#nameInput");
@@ -15,7 +11,7 @@ feedbackForm.addEventListener("submit", async (e) => {
     const selectedEmoji = [...emojiInputs].find(input => input.checked)?.value;
 
     if (!nameInput.value || !selectedEmoji) {
-        alert("Por favor, preencha o nome e escolha um emoji.");
+        alertT("nomeEmojiFaltando");
         return;
     }
 
@@ -57,15 +53,15 @@ feedbackForm.addEventListener("submit", async (e) => {
 
         //Retorna OK se der certo ou ERROR se der errado
         if (response.ok) {
-            alert("Obrigado pelo feedback!");
+            alertT("feedbackSucesso");
             feedbackForm.reset();
             feedbackForm.classList.add("hidden");
         } else {
-            alert("Erro ao enviar feedback.");
+            alertT("feedbackErro");
         }
     } catch (error) {
         console.error("Erro:", error);
-        alert("Erro na conexão com o servidor.");
+        alertT("conexaoErro");
     }
 
 

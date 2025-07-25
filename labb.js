@@ -435,7 +435,7 @@ function checkCollision() {
     assassins.forEach(a => {
         if (a.x === player.x && a.y === player.y) {
             setTimeout(() => {
-                alert(`Você foi pego pelo assassino! Fim de jogo. Reiniciando Nível 1.`);
+                alertT("pego");
                 level = 0;
                 resetGame();
                 onModalFeedBack();
@@ -468,7 +468,7 @@ window.addEventListener('keydown', e => {
 
         if (player.x === exit.x && player.y === exit.y) {
             setTimeout(() => {
-                alert('Você escapou! Preparando o próximo nível...');
+                alertT("escapou");
                 resetGame();
                 onModalFeedBack();
             }, 50);
