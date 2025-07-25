@@ -26,7 +26,7 @@ const translations = {
         gameIntro1: "O que é este jogo?",
         gameIntro2: "Este jogo é um Labirinto onde <span class='azul'>você</span> deve chegar à <span class='verde'>saída</span>, enquanto evita e escapa dos <span class='vermelho'>assassinos</span> que estão espalhados no labirinto.",
         gameIntro3: "Usando as teclas W, A, S, D, você move o seu <span class='azul'>personagem</span> pelo labirinto até a <span class='verde'>saída</span>.",
-        gameIntro4: "Fique esperto! Os <span class='vermelho'>assassinos</span> realmente vão atrás de <span class='azul'>você</span>.",
+        gameIntro4: "Se <span class='azul'>você</span> não tiver uma estratégia, os <span class='vermelho'>assassinos</span> o cercarão e farão coisas piores ao invés de te matar.",
         gameIntro5: "Abaixo está uma caixa para você deixar o seu feedback e um comentário/crítica sobre o %palavra%.",
         copyright: "Copyright © Todos os direitos reservados",
         alerts: {
@@ -49,7 +49,7 @@ const translations = {
         gameIntro1: "What is this game?",
         gameIntro2: "This game is a Maze where <span class='azul'>you</span> must reach the <span class='verde'>exit</span> while avoiding and escaping from the <span class='vermelho'>killers</span> scattered throughout the maze.",
         gameIntro3: "Using the W, A, S, D keys, you move your <span class='azul'>character</span> through the maze to the <span class='verde'>exit</span>.",
-        gameIntro4: "Stay alert! The <span class='vermelho'>killers</span> really come after <span class='azul'>you</span>.",
+        gameIntro4: "If <span class='azul'>you</span> don't have a strategy, the <span class='vermelho'>assassins</span> will surround you and do worse things instead of killing <span class='azul'>you</span>.",
         gameIntro5: "Below is a box for you to leave your feedback and a comment/criticize about the %palavra%.",
         copyright: "Copyright © All rights reserved",
         alerts: {
