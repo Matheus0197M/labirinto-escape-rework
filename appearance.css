@@ -1,0 +1,323 @@
+/*Para restaurar tudo, zeramos a margin e o padding*/
+html,
+body {
+    margin: 0;
+    /* Remove a margem padrão do navegador. */
+    padding: 0;
+    /* Remove o preenchimento padrão do navegador. */
+    background: #23242a;
+    /* Cor de fundo escura para a página. */
+    font-family: system-ui, sans-serif;
+    /* Define uma família de fonte moderna. */
+    height: 100vh;
+    /* Faz o corpo da página ocupar 100% da altura da janela (viewport height). */
+    scroll-behavior: smooth;
+}
+
+/*Usei esta main para centrazizar as três divs principais*/
+main {
+    display: flex;
+    /* Transforma 'main' em um container flexbox. */
+    flex-direction: column;
+    /* Organiza os itens em uma coluna. */
+    justify-content: center;
+    /* Centraliza os itens verticalmente. */
+    align-items: center;
+    /* Centraliza os itens horizontalmente. */
+    padding: 0.5rem;
+    /* Adiciona um pequeno preenchimento interno. */
+}
+
+/*Estilo do Canvas do Labirinto*/
+canvas {
+    background: #fff;
+    /* Cor de fundo branca para o canvas antes de carregar a imagem. */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    /* Adiciona uma sombra para dar profundidade. */
+    border-radius: 10px;
+    /* Borda arredondada. */
+    border: 0.5px solid white;
+    /* Uma borda fina branca. */
+}
+
+#mazeCanvas {
+    border: #1a1a1a 10px solid;
+    /* Borda mais grossa e escura para o labirinto. */
+    border-radius: 3%;
+    /* Borda ligeiramente arredondada. */
+}
+
+/*Instruções iniciais*/
+#info {
+    display: flex;
+    /* Transforma 'info' em flexbox. */
+    justify-content: center;
+    /* Centraliza o conteúdo horizontalmente. */
+    align-items: center;
+    /* Centraliza o conteúdo verticalmente. */
+    color: #fff;
+    /* Cor do texto branca. */
+    font-family: system-ui, sans-serif;
+    /* Fonte. */
+    border-radius: 10px;
+    /* Borda arredondada. */
+    margin: 10px;
+    /* Margem externa. */
+    background: linear-gradient(to right, #0066ff, #4d0279);
+    /* Gradiente de cor de fundo. */
+    border: 0.5px solid rgb(0, 0, 0);
+    /* Borda fina preta. */
+    padding: 10px;
+    /* Preenchimento interno. */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /* Sombra. */
+}
+
+/*Estilização da caixa de feedback*/
+.feedback {
+    display: none;
+    /* ESCONDIDO POR PADRÃO! (Aparece via JavaScript). */
+    justify-content: center;
+    /* Centraliza o conteúdo horizontalmente. */
+    align-items: center;
+    /* Centraliza o conteúdo verticalmente. */
+    flex-direction: column;
+    /* Organiza os itens em coluna. */
+    padding: 15px;
+    /* Preenchimento interno. */
+    margin: 10px;
+    /* Margem externa. */
+    background: linear-gradient(#0048b4, #4d0279);
+    /* Gradiente de cor de fundo. */
+    border-radius: 20px;
+    /* Borda bem arredondada. */
+    color: white;
+    /* Cor do texto branca. */
+    text-align: center;
+    /* Alinha o texto ao centro. */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /* Sombra. */
+}
+
+.feedback button {
+    border-radius: 5px;
+    /* Borda arredondada para o botão. */
+    color: #fff;
+    /* Cor do texto do botão branca. */
+    width: 70px;
+    /* Largura fixa do botão. */
+    height: 30px;
+    /* Altura fixa do botão. */
+    background: #5350ff;
+    /* Cor de fundo do botão. */
+    margin: 5px;
+    /* Margem externa. */
+    border-bottom: 0;
+    /* Remove a borda inferior para efeito visual. */
+}
+
+.feedback button:hover {
+    background-color: rgb(180, 236, 255);
+    /* Cor de fundo ao passar o mouse. */
+    color: black;
+    /* Cor do texto ao passar o mouse. */
+    border-bottom: 3px solid black;
+    /* Adiciona uma borda inferior ao passar o mouse. */
+}
+
+.emotes {
+    display: flex;
+    /* Transforma em flexbox. */
+    justify-content: center;
+    /* Centraliza horizontalmente. */
+    gap: 15px;
+    /* Espaçamento entre os emojis. */
+    font-size: 2rem;
+    /* Tamanho da fonte dos emojis. */
+}
+
+.emotes input[type="radio"] {
+    display: none;
+    /* ESCONDE os botões de rádio originais. Usaremos os labels como botões visuais. */
+}
+
+.emotes label {
+    cursor: pointer;
+    /* Muda o cursor para uma mãozinha ao passar por cima. */
+    transition: transform 0.2s;
+    /* Adiciona uma transição suave para o efeito de escala. */
+}
+
+.emotes input[type="radio"]:checked+label {
+    /* Quando um rádio é selecionado, aplica estilo ao label logo depois dele. */
+    transform: scale(1.3);
+    /* Aumenta o tamanho do emoji. */
+    outline: 2px solid #4CAF50;
+    /* Adiciona uma borda verde ao redor do emoji selecionado. */
+    border-radius: 8px;
+    /* Borda arredondada para a borda verde. */
+}
+
+.feedback input {
+    padding: 10px;
+    /* Preenchimento interno. */
+    margin: 10px;
+    /* Margem externa. */
+    border-radius: 8px;
+    /* Borda arredondada. */
+    border: none;
+    /* Remove a borda padrão. */
+}
+
+/*Finalmente a caixa lateral, onde comento sobre
+o que é o jogo e como funciona, além de mencionar
+sobre o usuário dar feedback novamente*/
+.coment-of-game {
+    position: fixed;
+    /* Posição fixa na tela, não rola com o conteúdo. */
+    top: 50%;
+    /* Começa no meio da altura da tela. */
+    left: 10px;
+    /* 10px da margem esquerda. */
+    transform: translateY(-50%);
+    /* Ajusta para centralizar verticalmente perfeitamente. */
+    width: 150px;
+    max-width: 155px;
+    /* Largura da caixa. */
+    max-height: 300vh;
+    /* Altura máxima (muito grande, na prática é limitada pelo conteúdo e overflow). */
+    overflow-y: auto;
+    /* Adiciona barra de rolagem vertical se o conteúdo for muito longo. */
+    background: #000;
+    /* Cor de fundo preta. */
+    color: white;
+    /* Cor do texto branca. */
+    border-radius: 10px;
+    /* Borda arredondada. */
+    padding: 15px;
+    /* Preenchimento interno. */
+    word-spacing: 3px;
+    /* Espaçamento entre palavras. */
+    font-size: 0.9rem;
+    /* Tamanho da fonte um pouco menor. */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /* Sombra. */
+}
+
+
+/*Responsividade para mobile*/
+@media (max-width: 768px) {
+
+    /* Aplica estes estilos quando a largura da tela for menor ou igual a 768px (para dispositivos menores). */
+    .coment-of-game {
+        position: static;
+        /* Remove a posição fixa, volta para o fluxo normal do documento. */
+        margin: 10px auto;
+        /* Centraliza horizontalmente e adiciona margem. */
+        width: 90%;
+        /* Ocupa 90% da largura da tela. */
+        transform: none;
+        /* Remove a transformação de centralização vertical. */
+    }
+}
+
+/*Para deixar o layout mais bonito
+e chamativo, usei cores e
+destaque em certas palavras chave*/
+.verde {
+    color: green;
+    /* Cor verde para texto. */
+    font-weight: bold;
+    /* Texto em negrito. */
+}
+
+.azul {
+    color: rgb(0, 119, 255);
+    /* Cor azul para texto. */
+    font-weight: bold;
+    /* Texto em negrito. */
+}
+
+.vermelho {
+    color: red;
+    /* Cor vermelha para texto. */
+    font-weight: bold;
+    /* background-color: ;*/
+    /* Texto em negrito. */
+}
+
+.amarelo {
+    color: gold;
+    /* Cor dourada para texto. */
+    font-weight: bold;
+    /* Texto em negrito. */
+}
+
+.rosa {
+    font-weight: bold;
+    /* Texto em negrito. */
+    color: violet;
+    /* Cor violeta para texto. */
+}
+
+.oi {
+    font-weight: bold;
+    /* Texto em negrito. */
+    color: #fff;
+    /* Cor branca para texto. */
+}
+
+footer {
+    position: fixed;
+    /* Posição fixa. */
+    display: flex;
+    /* Flexbox. */
+    bottom: 0;
+    /* Alinha na parte inferior da tela. */
+    left: 0;
+    /* Alinha na parte esquerda. */
+    right: 0;
+    /* Alinha na parte direita. */
+    width: 100%;
+    /* Ocupa 100% da largura. */
+    padding: 10px;
+    /* Preenchimento interno. */
+    margin-top: 5px;
+    /* Margem superior. */
+    text-align: center;
+    /* Alinha texto ao centro. */
+    justify-content: center;
+    /* Centraliza conteúdo horizontalmente. */
+    align-items: center;
+    /* Centraliza conteúdo verticalmente. */
+    color: whitesmoke;
+    /* Cor do texto. */
+    font-weight: 600;
+    /* Espessura da fonte. */
+    border: 0.5px solid red;
+    /* Borda vermelha. */
+    background-color: #000;
+    /* Cor de fundo preta. */
+}
+
+.nivel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 5px;
+    text-align: center;
+}
+
+button {
+    border-radius: 10px;
+    background: linear-gradient(to right, #e79e00, #ff8800);
+    color: white;
+    padding: 5px;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+    border-bottom: 3px solid black;
+}
